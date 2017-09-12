@@ -3,7 +3,6 @@ import subprocess
 import time
 import os
 import sys
-import errno
 from pyqtgraph.pgcollections import OrderedDict
 from pyqtgraph.python2_3 import basestring
 
@@ -144,14 +143,7 @@ except:
     output = ''
     fail = False
     while True:
-        try:
-            c = process.stdout.read(1).decode()
-        except IOError as err:
-            if err.errno == errno.EINTR:
-                # Interrupted system call; just try again.
-                c = ''
-            else:
-                raise
+        c = process.stdout.read(1).decode()
         output += c
         #sys.stdout.write(c)
         #sys.stdout.flush()
